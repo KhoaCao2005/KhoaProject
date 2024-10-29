@@ -3,13 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package DTO;
 
-import DTO.BeeColony;
-import DTO.Colony;
-import DTO.FPTUniversity;
-import DTO.Role;
-import DTO.University;
+import java.util.Scanner;
 
 /**
  *
@@ -17,22 +13,41 @@ import DTO.University;
  */
 public class Tester {
     public static void main(String[] args) {
-        Colony obj1 = new BeeColony(2000, "honey", "land");
-        System.out.println(obj1);
-        obj1.grow();
-        obj1.reproduce();
-        
-        University obj2 = new FPTUniversity(100000, "FPT", "Cantho");
-        System.out.println(obj2);
-        obj2.enroll();
-        obj2.educate();
-
-        Role df = new BeeColony(3000, "wasp", "land");
-        System.out.println(df);
-        df.createWorker();
-
-        df = new FPTUniversity(100000, "FPT", "Hanoi");
-        System.out.println(df);
-        df.createWorker();
+        Item item = null;
+        int choice = 0;
+        Scanner sc = new Scanner(System.in);
+        do {            
+            System.out.println("1. Create a Vase:");
+            System.out.println("2. Create a Statue:");
+            System.out.println("3. Create a Painting:");
+            System.out.println("4. Display the Item:");
+            System.out.println("Input a choice:");
+            choice = sc.nextInt();
+            switch(choice){
+                case 1:
+                    item = new Vase();
+                    ((Vase)item).inputVase();
+                    break;
+                case 2:
+                    item = new Statue();
+                    ((Statue)item).inputStatue();
+                    break;
+                case 3:
+                    item = new Painting();
+                    ((Painting)item).inputPainting();
+                    break;
+                case 4:
+                    if(item!=null){
+                        if(item instanceof Vase)
+                            ((Vase)item).outputVase();
+                        else if(item instanceof Statue)
+                            ((Statue)item).outputStatue();
+                        else if(item instanceof Painting)
+                            ((Painting)item).outputPainting();
+                    }
+                    else System.out.println("you need to create an object");
+                    break;
+            }
+        } while (choice<=4);
     }
 }
